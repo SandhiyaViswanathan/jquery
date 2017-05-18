@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Json data to HTML Table using Ajax Jquery getJSON method</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="barchart.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+   
+    
+    
+   
+    <style>
+      table, th, td
+       {
+          border: 1px solid black;
+          border-collapse: collapse;
+       }
+      th, td 
+       {
+          padding: 15px;
+       }
+    </style>
+  </head>
+
+<body>
+
+
+
+ 
+  <div class ="container">
+    <div class="col-md-12">
+        <table border="4px" padding="15px" id="country_table" align="center">
+              <br>
+            <tr>
+                <th>Country</th>
+                <th>Sugar</th>
+                <th>Salt</th>
+                <th></th>
+            </tr>
+        </table>
+        <form>
+            <table id="add_item" border="0" align="center">
+                 <br>
+                 <tr><td>Country:</td><td><input type="text" id="country_Name" name="Country"></td></tr>
+                 <tr><td>Sugar:</td><td><input type="number" id="sugar_Value" name="Sugar"></td></tr>
+                 <tr><td>Salt:</td><td><input type="number" id="salt_Value" name="Salt"></td></tr>
+                 <tr><td></td><td><input type="button" value="Add" id="add_value" name="btnAdd"></td></tr>
+              </table>
+        </form>
+    </div>
+
+  </div>
+    <div class="col-md-12">
+      
+      
+   
+      <script src="index.js"></script>
+
+    </div>
+    
+   
+</body>
+</html>
