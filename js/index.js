@@ -26,15 +26,17 @@ $(document).ready(function(){
     $('#add_value').on('click',function(){
         var item={
             Country: $Country.val(),
-            Sugar: Number($Sugar.val()),
-            Salt: Number($Salt.val()),
+            Sugar: parseFloat($Sugar.val()),
+            Salt: parseFloat($Salt.val()),
         }
         
         $.ajax({
             type:'POST',
             url:'http://localhost:3000/name',
             data:item,
-            dataType:'json',
+            contentType:"application/json; charset=utf-8",
+            data:JSON.stringify(item),
+            dataType:"json",
             success: function(newValue){
                 
                 $table.append('<tr><td>'+newValue.Country+'</td><td>'+Number(newValue.Sugar)+'</td><td>'
@@ -73,9 +75,9 @@ $(document).ready(function(){
 
     function creategraph()
     {
-    var margin={top:40, bottom:100, left:100, right:50},
-    width=1400-margin.left-margin.right,
-    height=600-margin.top-margin.bottom;
+    var margin={top:20, bottom:100, left:40, right:90},
+    width=600-margin.left-margin.right,
+    height=500-margin.top-margin.bottom;
 
     var horizontal=d3.scale.ordinal().rangeRoundBands([0,width],0.12),
     vertical=d3.scale.linear().rangeRound([height,0]);
@@ -91,22 +93,22 @@ $(document).ready(function(){
     .scale(vertical)
     .orient("left");
 
-    var svg=d3.select("body").append("svg")
+    var svg=d3.select("#addgraph").append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
-      // .append("g")
+      .append("g")
       .attr("transform","translate(" + margin.left + "," + margin.top + ")");
 
       d3.json("http://localhost:3000/name",function(err,data){
 
       if(err)
-          console.log("error")
+          console.log("error");
         
       data.forEach(function(d)
       {
-        d.Country=(d.Country);
-        d.Salt=parseFloat(d.Salt);
-        d.Sugar=parseFloat(d.Sugar);
+        d.Country=d.Country;
+        d.Salt=parseInt(d.Salt);
+        d.Sugar=parseInt(d.Sugar);
       });
     var xData=["Sugar","Salt"];
     var dataIntermediate = xData.map(function (c) 
@@ -161,16 +163,25 @@ $(document).ready(function(){
       .attr("class", "axis")
       .attr("transform", "translate(0," + height + ")")
       .call(xAxis)
-      .append("text")
       .selectAll("text")
-       .attr("transform", "translate(" + width + ",0)")
-       .attr("transform","rotate(-60)")
-       .attr("dy","1.3em")
-       .attr("dx","1.2em")
+      .attr("transform", "translate(" + width + ",0)")
+      .attr("transform","rotate(-75)")
+      .attr("dy","-0.5em")
+       .attr("dx","-.60em")
        .style("font-size","15px")
        .style("font-weight","bold")
        .style("color","red")
-       .text("Countries");
+       .style("text-anchor","end")
+       // .text("Countries");
+
+  svg.append("text")
+      .attr("class", "x label")
+      .attr("text-anchor", "end")
+      .attr("x", "520")
+      .attr("y", "400")
+      .style('fill', 'black')
+      .style("font-size", "15px")
+      .text("countries");
 
   svg.append("g")
         .attr("class", "axis")
@@ -182,7 +193,8 @@ $(document).ready(function(){
             .style("font-size","12px")
             .style("font-weight","bold")
             .style("color","red")
-            .text("Sugar,Salt");
+            .text("Sugar,Salt")
+            .style("font-weight","bold");
 
   var mar = svg.selectAll(".corner")
          .data(color.domain())

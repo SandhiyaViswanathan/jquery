@@ -41,9 +41,14 @@
       "Salt": 3000.358757
     },
     {
-      "Country": "sads",
-      "Sugar": "12111",
-      "Salt": "1224"
+      "Country": "chicagoo",
+      "Sugar": 56000,
+      "Salt": 500.99
+    },
+    {
+      "Country": "wert",
+      "Sugar": 12345,
+      "Salt": 13456
     }
   ]
 }
